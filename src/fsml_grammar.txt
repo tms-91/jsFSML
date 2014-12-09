@@ -1,3 +1,4 @@
+
 start = fsm
 
 ws "whitespace" = [ \t\n\r]*
@@ -6,9 +7,9 @@ fsm "fsm" = st:(state)* { return st; }
 
 initial = "initial"
 
-state "state" = init:(initial ws {return true;})? "state" ws name:id ws "{" ws tr:transitionwrapper* ws "}" ws { var obj={}; obj.init=init; obj.name=name; obj.trans=tr; return obj;}
+state "state" = init:(initial ws {return true;})? "state" ws name:id ws "{" ws tr:transitionwrapper* ws "}" ws { return new State(name,init,tr);}
 
-transition = i:input ac:action? ns:transTo? ";" {var trans={}; trans.in= i; trans.act=ac; trans.to=ns; return trans;}
+transition = i:input ac:action? ns:transTo? ";" {return new Transition(i,ac,ns);}
 
 transitionwrapper = tr:transition ws? {return tr;}
 

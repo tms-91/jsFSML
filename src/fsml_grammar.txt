@@ -1,0 +1,21 @@
+start = fsm
+
+ws "whitespace" = [ \t\n\r]*
+
+fsm "fsm" = st:(state)* { return st; }
+
+initial = "initial"
+
+state "state" = init:(initial ws {return true;})? "state" ws name:id ws "{" ws tr:transitionwrapper* ws "}" ws { var obj={}; obj.init=init; obj.name=name; obj.trans=tr; return obj;}
+
+transition = i:input ac:action? ns:transTo? ";" {var trans={}; trans.in= i; trans.act=ac; trans.to=ns; return trans;}
+
+transitionwrapper = tr:transition ws? {return tr;}
+
+id = letters:[a-z]i+ { return letters.join(""); }
+
+input = letters:[a-z]i+ { return letters.join(""); }
+
+action = "/" ac:id+{return ac.join("");}
+
+transTo = ws? "->" ws? name:id { return name; }

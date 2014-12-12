@@ -11,10 +11,20 @@
 		<!-- our scripts -->
 		<script src="src/jsFSML-model.js" type="text/javascript"></script>
 		<script src="src/jsFSML-parser.js" type="text/javascript"></script>
+                <link type="text/css" rel="stylesheet" href="css/main.css">
 
 	</head>
 	<body>
-	<textarea id="input"></textarea>
-	<button name="TestIt" type="button" value="TestIt" onclick="test()">text</button>
-	</body>
+        <div id="wrapper">
+            <div id="header">
+                 <h4>jsFSM</h4>
+            </div>
+            <div id="content">
+                <div class="line-nums"><span>1</span></div>
+                <textarea id="input" rows="60" cols="50"></textarea>
+                <textarea readonly id="feedback"></textarea>
+                <div id="parse-btn" class="action-btn">Parse</div>
+            </div>
+        </div>
+    </body>
 </html>

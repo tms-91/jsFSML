@@ -1,0 +1,91 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    font-family:'Roboto', Helvetica, Arial, sans-serif;
+    outline: none;
+}
+body {
+    background-color: #f5f5f5;
+    min-width: 1120px;
+    color: #555;
+}
+.action-btn {
+    background-color: #33b5e5;
+    color: #fff;
+    padding: 0 10px;
+    line-height: 35px;
+    border: 1px solid #09c;
+    border-bottom-width: 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 15px;
+    cursor: pointer;
+    opacity: 0.8;
+    float: left;
+}
+.action-btn:hover {
+    opacity: 1;
+}
+.action-btn:active {
+    background-color: #09c;
+}
+#parse-btn {
+    width: 20%;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    display: inline;
+    float: right;
+}
+#wrapper {
+    width: 800px;
+    min-height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-bottom-width: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    overflow: auto;
+}
+#header {
+    margin: 10px;
+    border-bottom:2px solid #09c;
+    padding: 5px;
+}
+#content {
+    padding: 12px;
+}
+textarea {
+    border: 1px solid #d8d8d8;
+    resize: none;
+    background-color: #fff;
+    width: 100%;
+    line-height: 13px;
+    font-size: 13px;
+}
+#feedback {
+    height: 40px;
+    width: 75%;
+    float: left;
+}
+.line-nums{
+    font-size:13px;
+    line-height:13px;
+    padding:10px 4px;
+    font-family: monospace;
+    background: #EEE;
+    position: absolute;
+    width: 20px;
+    left: -28px;
+    bottom: 0;
+    top: 0;
+    text-align:right;
+}

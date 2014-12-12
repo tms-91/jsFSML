@@ -1,4 +1,6 @@
-
+$('document').ready(function(){
+    $("#parse-btn").click(test());
+});
 
 function createParser(grammarURL) {
 	$.ajaxSetup({async:false});

@@ -34,7 +34,7 @@ body {
 }
 #parse-btn {
     width: 20%;
-    height: 40px;
+    height: 5%;
     text-align: center;
     vertical-align: middle;
     line-height: 40px;
@@ -53,16 +53,21 @@ body {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
-    overflow: auto;
+    overflow: hidden;
 }
 #header {
     margin: 10px;
     border-bottom:2px solid #09c;
     padding: 5px;
 }
-#content {
+.content {
     padding: 12px;
+    height: 800px;
 }
+#result{
+    display:none;
+}
+
 textarea {
     border: 1px solid #d8d8d8;
     resize: none;
@@ -72,20 +77,21 @@ textarea {
     font-size: 13px;
 }
 #feedback {
-    height: 40px;
+    height: 5%;
     width: 75%;
     float: left;
 }
-.line-nums{
-    font-size:13px;
-    line-height:13px;
-    padding:10px 4px;
-    font-family: monospace;
-    background: #EEE;
-    position: absolute;
-    width: 20px;
-    left: -28px;
-    bottom: 0;
-    top: 0;
-    text-align:right;
+#input{
+    width: 100%;
+    height: 800px;
+}
+
+
+.no-select{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

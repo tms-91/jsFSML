@@ -2,10 +2,10 @@
 // State class
 function State (id,initial,transitions) {
 	this.id=id;
-	if(this.initial==true){
-		this.initial=true;
+	if(initial == true){
+		this.initial = true;
 	} else {
-		this.initial=false;
+		this.initial = false;
 	}
 	this.transitions=transitions;
 }

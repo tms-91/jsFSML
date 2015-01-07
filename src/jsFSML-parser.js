@@ -1,11 +1,7 @@
-$('document').ready(function(){
-    $("#parse-btn").click(buttonClick);
-
-});
 
 function loadFileSynchronous(url){
 	$.ajaxSetup({async:false});
-	var response = $.get(grammarURL);
+	var response = $.get(url);
 	$.ajaxSetup({async:true});
 	return response;
 }
@@ -19,58 +15,8 @@ function parseInput(parser,input) {
 	return parser.parse(input);
 }
 
-function buttonClick() {
-	//console.log(JSON.stringify(parseInput(createParser("src/fsml_grammar.txt"),$("#input").val())), null, 4);
-        $("#feedback").val("");
-	var parsed = parseInput(createParser("src/fsml_grammar.txt"),$("#input").val());
-        console.log(parsed);
-	console.log("CHECKS:");
-	var constraintResults=checkConstraints(parsed);
-	if(printConstraintResults(constraintResults,"#feedback")){
-		feedback("parsing complete");
-		visualize("result", parsed);
-	}
-}
 
-function feedback(text){
-    var feedback = $("#feedback");
-    feedback.val(feedback.val() + text);
-}
 
-function printConstraintResults(constraintResult,printTo){
-	var ret=true;
-	var val=$(printTo).val()+"\n";
-
-	if(constraintResult["singleInitial"].returnval==false){
-		console.log("multiple initial states detected! offenders: "+JSON.stringify(constraintResult["singleInitial"].offenders));
-		val+="multiple initial states detected! offenders: "+JSON.stringify(constraintResult["singleInitial"].offenders)+"\n";
-		ret=false;
-	}
-	if(constraintResult["uniqueIds"].returnval==false){
-		console.log("non unique ids for states detected! offenders: "+JSON.stringify(constraintResult["uniqueIds"].offenders));
-		val+="non unique ids for states detected! offenders: "+JSON.stringify(constraintResult["uniqueIds"].offenders)+"\n";
-		ret=false;
-	}
-	if(constraintResult["targetstatesResolvable"].returnval==false){
-		console.log("non resolvable states detected! offenders: "+JSON.stringify(constraintResult["targetstatesResolvable"].offenders));
-		val+="non resolvable states detected! offenders: "+JSON.stringify(constraintResult["targetstatesResolvable"].offenders)+"\n";
-		ret=false;
-	}
-	if(constraintResult["inputUniquelyTargetState"].returnval==false){
-		console.log("multiple target states for same input detected! offenders: "+JSON.stringify(constraintResult["inputUniquelyTargetState"].offenders));
-		val+="multiple target states for same input detected! offenders: "+JSON.stringify(constraintResult["inputUniquelyTargetState"].offenders)+"\n";
-		ret=false;
-	}
-	if(constraintResult["allStatesReachable"].returnval==false){
-		console.log("non reachable states detected! offenders: "+JSON.stringify(constraintResult["allStatesReachable"].offenders));
-		val+="non reachable states detected! offenders: "+JSON.stringify(constraintResult["allStatesReachable"].offenders)+"\n";
-		ret=false;
-	}
-
-	$(printTo).val(val);
-
-	return ret;
-}
 
 function checkConstraints(parseTree){
 	var checkResults = {};
@@ -231,4 +177,30 @@ function constraintAllStatesReachable(parseTree){
 		}
 	}
 	return {"returnval":ret, "offenders":offendingStates}
+}
+
+function createCode(parseTree){
+	//creating datastructures for later use
+	var states = [];
+	var initialState=null;
+	var transitions={};
+
+	for(var stateNum=0;stateNum<parseTree.length;stateNum++){
+		var currentState=parseTree[stateNum];
+		states.push(currentState.id);
+		if(currentState.initial){
+			initialState=currentState.id;
+		}
+		transitions[currentState.id]=currentState.transitions;
+	}
+
+	// loading the template
+	var codeTemplate = loadFileSynchronous("src/jsFSML-simulator.template.js").responseText;
+	codeTemplate=codeTemplate+"\n";
+	var simulatorConfiguration="";
+	simulatorConfiguration=simulatorConfiguration+"\n"+"function jsFSML_createSimulator(){\n";
+	simulatorConfiguration=simulatorConfiguration+"var sm = new jsFSML_StateManagement("+JSON.stringify(states)+",\""+initialState+"\");\n";
+	simulatorConfiguration=simulatorConfiguration+"var tm = new jsFSML_TransitionManagement(sm,"+JSON.stringify(transitions)+");\n";
+	simulatorConfiguration=simulatorConfiguration+"return tm;\n}\n";
+	return codeTemplate+simulatorConfiguration;
 }

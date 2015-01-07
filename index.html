@@ -11,7 +11,8 @@
 		<!-- our scripts -->
 		<script src="src/jsFSML-model.js" type="text/javascript"></script>
 		<script src="src/jsFSML-parser.js" type="text/javascript"></script>
-                <script src="src/jsFSML-visualizer.js" type="text/javascript"></script>
+		<script src="src/jsFSML-siteFunctions.js" type="text/javascript"></script>
+                	<script src="src/jsFSML-visualizer.js" type="text/javascript"></script>
                 <!-- css -->
                 <link type="text/css" rel="stylesheet" href="css/main.css">
                 <link href="http://visjs.org/dist/vis.css" rel="stylesheet" type="text/css" />
@@ -23,13 +24,28 @@
                  <h4>jsFSML</h4>
             </div>
             <div  class="content">
-                <textarea id="input"></textarea>
+                <textarea id="input">initial state locked {
+key/unlock -> unlocked;
+force/callhelp -> alarm;
+}
+state unlocked {
+key/lock -> locked;
+force;
+}
+state alarm {
+secretcombination -> locked;
+}</textarea>
                 <textarea readonly id="feedback"></textarea>
                 <div id="parse-btn" class="action-btn no-select">Parse</div>
+		<div id="export-btn" class="action-btn no-select">Create Simulator Code</div>
+		<div id="simulation-btn" class="action-btn no-select">Start Simulation</div>
             </div>
             <div id="result" class="content">
-                
+
             </div>
+	    <div id="sim-buttons" class="content">
+
+	    </div>
         </div>
     </body>
 </html>

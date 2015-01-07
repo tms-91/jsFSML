@@ -41,6 +41,33 @@ body {
     display: inline;
     float: right;
 }
+#export-btn {
+    width: 20%;
+    height: 5%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    display: inline;
+    float: right;
+}
+#simulation-btn {
+    width: 20%;
+    height: 5%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    display: inline;
+    float: right;
+}
+.sim-btns {
+    width: 20%;
+    height: 5%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    display: inline;
+    float: middle;
+}
 #wrapper {
     width: 800px;
     min-height: 200px;
@@ -66,6 +93,8 @@ body {
 }
 #result{
     display:none;
+    width: 100%;
+    float: left;
 }
 
 textarea {
@@ -77,7 +106,7 @@ textarea {
     font-size: 13px;
 }
 #feedback {
-    height: 5%;
+    height: 16%;
     width: 75%;
     float: left;
 }

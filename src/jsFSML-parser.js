@@ -3,13 +3,15 @@ $('document').ready(function(){
 
 });
 
-function createParser(grammarURL) {
+function loadFileSynchronous(url){
 	$.ajaxSetup({async:false});
-	var grammar = $.get(grammarURL).responseText;
-
-
+	var response = $.get(grammarURL);
 	$.ajaxSetup({async:true});
-	//alert(grammar.responseText);
+	return response;
+}
+
+function createParser(grammarURL) {
+	var grammar = loadFileSynchronous(grammarURL).responseText;
 	return eval(PEG.buildParser(grammar));
 }
 

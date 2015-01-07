@@ -85,7 +85,7 @@ jsFSML_TransitionManagement.prototype.setActionListener = function (action,funct
 	}
 }
 
-jsFSML_TransitionManagement.prototype.input = function (input){
+jsFSML_TransitionManagement.prototype.enter_input = function (input){
 	var idx=this.input.indexOf(input);
 	if(idx==-1){
 		// unknown input
@@ -98,7 +98,7 @@ jsFSML_TransitionManagement.prototype.input = function (input){
 
 		// get rules of current state for input
 		for( var i=0;i<rulesOfConcern.length;i++){
-			if(reulesOfConcern[i].input==input){
+			if(rulesOfConcern[i].input==input){
 				appliedRules.push(rulesOfConcern[i]);
 			}
 		}

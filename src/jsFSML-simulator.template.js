@@ -30,12 +30,37 @@ function jsFSML_TransitionManagement(stateManagement,transitionRules){
 	// contains action listeners that are called on specific transitions if available. format is function()
 	this.actionListeners={};
 
-	//these two arrays are for making sure our inputs are sane
-	this.input=inputs;
-	this.actions=actions;
+
 
 	// this will hold the datastructure containing the transition rules; format: {"id":[rule_for_id]}
 	this.transitionRules=transitionRules;
+
+	//these two arrays are for making sure our inputs are sane
+	this.input=[];
+	this.actions=[];
+
+	for (var state in transitionRules){
+		if (Object.prototype.hasOwnProperty.call(transitionRules, state)) {
+    			if(transitionRules[state] instanceof Array){
+				if(transitionRules[state].length>0){
+					for(var i=0;i<transitionRules[state].length;i++){
+						var input = transitionRules[state][i].input;
+						var action = transitionRules[state][i].action;
+
+						if(this.input.indexOf(input)==-1){
+							this.input.push(input);
+						}
+
+						if(action!=null){
+							if(this.actions.indexOf(action)==-1){
+								this.actions.push(action);
+							}
+						}
+					}
+				}
+			}
+  		}
+	}
 }
 
 jsFSML_TransitionManagement.prototype.getStateManagement = function (){
